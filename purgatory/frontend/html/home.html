@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selecionar equipe - Purgatory</title>
+    <link rel="stylesheet" href="../css/home.css">
+    <link rel="stylesheet" href="../css/homemobile.css" media="(max-width: 900px)">
+</head>
+<body>
+    <!-- Fundo base da tela inicial, sempre preservado por baixo. -->
+    <img src="../img/backgrounds/fundo0.jpeg" class="background" alt="Fundo de seleção">
+    <img class="background background-overlay" alt="Variação de cor do fundo" aria-hidden="true">
+
+    <!-- barra superior da pagina com botoes -->
+    <header>
+        <button type="button" disabled>Teste</button>
+        <button type="button" disabled>Teste</button>
+        <button type="button" disabled>Teste</button>
+    </header>
+
+    <!-- Conteúdo principal da tela de seleção. -->
+    <main class="selection-screen">
+        <div class="selection-content">
+            <div class="selection-header">
+                <div class="selection-subtitle">Selecione a versão da história</div>
+                <h1 id="selection-main-title" class="selection-main-title">ESCOLHA QUAL EQUIPE VC QUER ACOMPANHAR</h1>
+                <div class="title-art-text" id="selection-title-text">Passe o mouse sobre o time para ver o título</div>
+            </div>
+
+            <!-- Botões das equipes. Cada um recebe um data-team para o JavaScript identificar qual opção foi escolhida. -->
+            <div class="team-buttons">
+                <button type="button" class="team-button" data-team="azul">AZUL</button>
+                <button type="button" class="team-button" data-team="verde">VERDE</button>
+                <button type="button" class="team-button" data-team="amarelo">AMARELO</button>
+                <button type="button" class="team-button" data-team="vermelho">VERMELHO</button>
+            </div>
+
+            <!-- silhuetas que aparece ao passar o mouse em cima da equipe. -->
+            <img id="selection-silhouette" class="selection-silhouette" alt="Silhueta do time" aria-hidden="true">
+        </div>
+    </main>
+
+    <script>
+        // Objeto com as informações de cada equipe
+        const selectionData = {
+            azul: {
+                title: 'LAGRIMAS GELADAS',
+                titleClass: 'team-azul-title',
+                silhouette: '../img/silhuazul.png',
+                background: '../img/backgrounds/fundo0azul.jpeg',
+                target: 'leitura.html?team=azul',
+                available: true
+            },
+            verde: {
+                title: 'GOTAS LUMINOSAS',
+                titleClass: 'team-verde-title',
+                silhouette: '../img/silhuverde.png',
+                background: '../img/backgrounds/fundo0verde.jpeg',
+                target: 'leitura.html?team=verde',
+                available: true
+            },
+            amarelo: {
+                title: 'PINGOS DE OURO',
+                titleClass: 'team-amarelo-title',
+                silhouette: '../img/silhuamarelo.png',
+                background: '../img/backgrounds/fundo0amarelo.jpeg',
+                target: 'leitura.html?team=amarelo',
+                available: false
+            },
+            vermelho: {
+                title: 'CHUVA DE SANGUE',
+                titleClass: 'team-vermelho-title',
+                silhouette: '../img/silhuvermelho.png',
+                background: '../img/backgrounds/fundo0vermelho.jpeg',
+                target: 'leitura.html?team=vermelho',
+                available: true
+            }
+        };
+
+        // Pega os elementos da página para atualizar o texto, a imagem e o fundo dinamicamente.
+        const mainTitle = document.getElementById('selection-main-title');
+        const titleText = document.getElementById('selection-title-text');
+        const silhouette = document.getElementById('selection-silhouette');
+        const background = document.querySelector('.background');
+        const backgroundOverlay = document.querySelector('.background-overlay');
+        let currentBackground = '';
+
+        function switchBackground(nextBackground) {
+            if (!backgroundOverlay) return;
+
+            if (!nextBackground) {
+                backgroundOverlay.style.opacity = '0';
+                backgroundOverlay.removeAttribute('src');
+                currentBackground = '';
+                return;
+            }
+
+            if (currentBackground === nextBackground) {
+                backgroundOverlay.style.opacity = '1';
+                return;
+            }
+
+            backgroundOverlay.style.opacity = '0';
+            setTimeout(() => {
+                backgroundOverlay.src = nextBackground;
+                backgroundOverlay.style.opacity = '1';
+                currentBackground = nextBackground;
+            }, 140);
+        }
+
+        // Atualiza a pré-visualização ao passar o mouse sobre uma equipe.
+        function updateSelectionPreview(team) {
+            const preview = selectionData[team] || {};
+            mainTitle.textContent = preview.title || 'ESCOLHA QUAL EQUIPE VC QUER ACOMPANHAR';
+            mainTitle.className = 'selection-main-title ' + (preview.titleClass || '');
+            titleText.textContent = preview.title ? '' : 'Passe o mouse sobre o time para ver o título';
+
+            if (preview.silhouette) {
+                silhouette.src = preview.silhouette;
+                silhouette.classList.add('visible');
+            }
+
+            if (background && preview.background) {
+                switchBackground(preview.background);
+            }
+        }
+
+        // Restaura o estado inicial quando o mouse sai do botão.
+        function resetSelectionPreview() {
+            mainTitle.textContent = 'ESCOLHA QUAL EQUIPE VC QUER ACOMPANHAR';
+            mainTitle.className = 'selection-main-title';
+            titleText.textContent = 'Passe o mouse sobre o time para ver o título';
+            silhouette.src = '';
+            silhouette.classList.remove('visible');
+            switchBackground('../img/backgrounds/fundo0.jpeg');
+        }
+
+        // Associa os eventos de hover e clique a cada botão da interface.
+        document.querySelectorAll('.team-button').forEach(button => {
+            const team = button.dataset.team;
+            const preview = selectionData[team];
+            if (!preview) {
+                button.disabled = true;
+                return;
+            }
+
+            button.addEventListener('pointerenter', () => updateSelectionPreview(team));
+            button.addEventListener('pointerleave', () => resetSelectionPreview());
+            button.addEventListener('click', () => {
+                localStorage.setItem('team', team);
+                window.location.href = preview.target;
+            });
+        });
+    </script>
+</body>
+</html>
