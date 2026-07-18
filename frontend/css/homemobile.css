@@ -1,0 +1,61 @@
+/* Estilos específicos para telas menores e celulares. */
+
+body {
+    padding: 12px;
+}
+
+.selection-screen {
+    margin-top: 76px;
+}
+
+.selection-content {
+    padding: 28px 14px 24px;
+}
+
+.selection-header {
+    min-height: 220px;
+    justify-content: space-between;
+}
+
+.selection-main-title {
+    font-size: 2rem;
+    margin-top: auto;
+    margin-bottom: 0;
+}
+
+.title-art-text {
+    display: none;
+}
+
+header {
+    height: 56px;
+    gap: 12px;
+}
+
+.team-button {
+    min-width: 120px;
+    padding: 14px 20px;
+}
+
+/*SILHUETAS*/
+.selection-silhouette {
+    position: absolute;
+    left: 50%;
+    bottom: 30%;
+    width: auto;
+    height: 55%;
+    max-width: none;
+    max-height: none;
+    transform: translateX(-50%) translateY(0%);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 1;
+    filter: contrast(0.95) brightness(1.05);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.selection-silhouette.visible {
+    opacity: 100%;
+    transform: translateX(-50%) translateY(-18%) scale(1.12);
+}
+
