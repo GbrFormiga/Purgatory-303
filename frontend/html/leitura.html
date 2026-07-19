@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purgatory #303</title>
+
+    <link rel="stylesheet" href="../css/leitura.css">
+    <link rel="stylesheet" href="../css/leituramobile.css" media="(max-width: 900px)">
+</head>
+<body>
+    <!-- Fundo fixo -->
+    <img src="../img/backgrounds/fundo1.jpeg" class="background" alt="">
+    <img class="background background-overlay" aria-hidden="true" alt="Fundo de leitura sobreposto">
+
+    <!-- Barra superior com botoes -->
+    <header>
+        <button type="button" onclick="window.location.href='home.html'">SELETOR DE EQUIPE</button>
+        <button id="background-toggle" type="button">FUNDOS</button>
+        <button>MUSICAS E SOUND EFFECTS</button>
+        <button>STATUS DE JOGO</button>
+    </header>
+
+    <!-- Controles para abrir a lista de capítulos e navegar entre eles. -->
+    <div class="chapter-controls">
+        <div class="chapter-select">
+            <button class="select-toggle" id="chapter-toggle" type="button">Capítulos ▾</button>
+            <div class="select-menu" id="chapter-menu"></div>
+        </div>
+
+        <div class="chapter-nav">
+            <button id="prev-chapter" type="button">← Anterior</button>
+            <button id="next-chapter" type="button">Próximo →</button>
+        </div>
+    </div>
+
+    <!-- Área onde o conteúdo do capítulo carregado será exibido. -->
+    <main class="reader" id="reader"></main>
+
+    <!-- Painel de fundos que sobe e desce. -->
+    <div class="background-panel" id="background-panel">
+        <div class="background-panel-top"></div>
+        <div class="background-panel-header">
+            <div class="background-panel-title">Escolher fundo</div>
+            <button id="background-panel-close" type="button" aria-label="Fechar painel de fundos">✕</button>
+        </div>
+        <div class="background-panel-description">Fundo automático muda conforme o ambiente descrito. Escolha um fundo para manter fixo.</div>
+        <div class="background-options" id="background-options"></div>
+    </div>
+
+    <!-- Botão para alternar entre o modo claro e escuro. -->
+    <button id="theme-toggle" type="button">🌙</button>
+
+    <!-- Botão deixar painel transparente. -->
+    <button id="ghostmode" type="button">👻</button>
+
+
+     <script src="../../backend/home.js"></script>
+</body>
+</html>
