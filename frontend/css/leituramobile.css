@@ -1,0 +1,209 @@
+/* Estilos específicos para telas menores e celulares na página de leitura. */
+
+body{
+    display:flex;
+    flex-direction:column;
+    min-height:100vh;
+    overflow-y:auto;
+    overflow-x:hidden;
+    padding:12px;
+    padding-bottom:40px;
+    background:#111;
+}
+
+/*Ordem de como cada elemento deve ficar na pg de cima pra baixo*/
+.chapter-controls{
+    order:1;
+}
+.reader{
+    order:2;
+}
+#theme-toggle{
+    order:3;
+}
+#ghostmode{
+    order:4;
+}
+header{
+    order:5;
+}
+
+/*BOTOES DE PULAR PAGINA*/
+.chapter-controls {
+    top: 70px;
+    width: calc(100% - 12px);
+    gap: 8px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    pointer-events: auto;
+    position: static;
+    transform: none;
+    margin: 12px 0 18px;
+    padding: 0;
+}
+
+.chapter-select,
+.chapter-nav {
+    width: auto;
+    flex-wrap: nowrap;
+    gap: 6px;
+}
+
+.select-toggle,
+.chapter-nav button,
+.select-menu button {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+}
+
+.chapter-nav {
+    justify-content: space-between;
+}
+
+/*O bagulho q fica la no topo da tela embaixo dos botoes, o nome disso é header não container animal*/
+header{
+    position: static;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin:20px 0 60px;
+    background:transparent;
+    backdrop-filter:none;
+}
+
+header button{
+    width: 100%;
+    min-height: 48px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 10px;
+    font-size: .95rem;
+    
+}
+
+body.light-mode header button{
+    text-shadow:
+        -1px -1px 0 #000,
+         1px -1px 0 #000,
+        -1px  1px 0 #000,
+         1px  1px 0 #000;
+}
+
+/*PAINEL DE LEITURA*/
+.reader {
+    width: calc(100% - 4px);
+    max-width: none;
+    height: 80vh;
+    padding: 18px 16px;
+    border-radius: 16px;
+    margin-top: 0.1px; /*isso aqui que controla a posiçao vertical com base na altura do header, aumentar joga pra baixo*/
+}
+
+.chapter h1 {
+    font-size: 1.5rem;
+    margin-bottom: 24px;
+}
+
+.chapter p {
+    font-size: 1rem;
+    line-height: 1.7;
+    text-indent: 1.2em;
+}
+
+.background{
+    position: absolute;
+    top: 0;
+    width: 110%;
+    height: 90vh;      
+    object-fit: cover;
+    object-position: center;
+    left:50%;
+    transform:translateX(-50%);
+
+    /*TRANSIÇÃO PRA PARTE TE BAIXO, FUNDO VAI SUMINDO AOS POUCOS*/
+     mask-image:linear-gradient(
+        to bottom,
+        black 0%,
+        black 75%,
+        transparent 100%
+    );
+
+    -webkit-mask-image:linear-gradient(
+        to bottom,
+        black 0%,
+        black 75%,
+        transparent 100%
+    );
+};
+
+
+#theme-toggle {
+    bottom: 12px;
+    right: 12px;
+    width: 44px;
+    height: 44px;
+    font-size: 18px;
+}
+
+.background-panel{
+    width:100%;
+    max-width:none;
+    max-height:70vh;
+    padding:18px;
+    border-radius:18px 18px 0 0;
+}
+
+.background-options{
+    grid-template-columns:1fr;
+}
+
+/*BOTAO DE LIGHT/DARK MODE*/
+#theme-toggle{
+    position:static;
+    margin-top: -30px;
+    transform: translateY(-8px);
+    z-index:20;
+    align-self: flex-end;
+    align-items:center;
+    justify-content:center;
+    width:52px;
+    height:52px;
+    padding:0;
+    cursor:pointer;
+    border:1px solid var(--team-accent);
+    border-radius:999px;
+    background:#1f1f1f;
+    color:#fff;
+    font-size:22px;
+    line-height:1;
+    box-shadow:0 10px 24px rgba(0,0,0,0.3);
+}
+
+/*BOTAO DE ghostmode*/
+#ghostmode{
+    position:static;
+    margin-top: -60px;
+    z-index:20;
+    display:inline-flex;
+    align-self: flex-start;
+    align-items:center;
+    justify-content:center;
+    width:52px;
+    height:52px;
+    padding:0;
+    cursor:pointer;
+    border:1px solid var(--team-accent);
+    border-radius:999px;
+    background:#1f1f1f;
+    color:#fff;
+    font-size:22px;
+    line-height:1;
+    box-shadow:0 10px 24px rgba(0,0,0,0.3);
+}
+
+
+

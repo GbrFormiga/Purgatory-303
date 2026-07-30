@@ -1,0 +1,60 @@
+@font-face {
+    font-family: 'Daydream';
+    src: url('../img/Daydream.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+.chapter-title-screen {
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    text-align: center;
+    padding: 32px 20px;
+}
+.chapter-title-label,
+.chapter-title-number,
+.chapter-title-name {
+    font-family: 'Daydream', Arial, sans-serif;
+    color: #ffffff;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    -webkit-text-stroke: 2px #000000;
+    paint-order: stroke fill;
+    text-shadow:
+        2px 0 #000,
+        -2px 0 #000,
+        0 2px #000,
+        0 -2px #000,
+        2px 2px #000,
+        -2px 2px #000,
+        2px -2px #000,
+        -2px -2px #000;
+}
+.chapter-title-label {
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    margin: 0;
+}
+.chapter-title-number {
+    font-size: clamp(3rem, 10vw, 5.5rem);
+    line-height: 1;
+    margin: 0;
+}
+.chapter-title-name {
+    font-size: clamp(1.1rem, 3vw, 1.8rem);
+    margin: 8px 0 0;
+    max-width: 90%;
+    line-height: 1.35;
+}
+.chapter-title-flower {
+    width: clamp(72px, 18vw, 120px);
+    height: auto;
+    object-fit: contain;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    margin: 4px 0;
+}
